@@ -25,8 +25,9 @@ docker run -d -e CTC_TWITTER_DB=$DB_TBL -e CTC_TWITTER_HOST=$DB_HOST -e CTC_TWIT
 
 ## Run
 
-In order to run the code locally, just execute the main function:
+In order to run the code locally, just execute the main function after installing dependencies.
 
 ```
+pip install --no-cache-dir -r requirements.txt
 python main.py
 ```
