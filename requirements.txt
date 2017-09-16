@@ -2,3 +2,4 @@ python-twitter
 vaderSentiment
 peewee
 PyMySQL
+retrying
