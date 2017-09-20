@@ -7,6 +7,7 @@ from twitter_preprocessor import *
 db.get_conn()
 db.create_table(TweetEarlyEth, safe=True)
 db.create_table(TweetEarlyBtc, safe=True)
+
 def writeTweetsEarlyDelayed(text, retry = 10):
     time.sleep(3)
     writeTweetsEarly(text, retry)
