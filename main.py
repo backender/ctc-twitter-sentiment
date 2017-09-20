@@ -1,13 +1,13 @@
-from twitter_stream import *
 import tweet_writer as writer
+from twitter_streamer import *
 
-track = ['btc', 'bitcoin', 'xbt', 'satoshi']
+tracker = ['ethereum','eth','btc', 'bitcoin', 'xbt']
 
-hashtags = ['#mpgvip', '#freebitcoin', '#makeyourownlane', '#footballcoin']
-words = ['entertaining', 'subscribe', 'free']
-bigrams = ['current price', 'bitcoin price', 'earn bitcoin']
-trigram = ['start trading bitcoin']
-filterList = hashtags + words + bigrams + trigram
+word = ['entertaining', 'subscribe', 'free','android','tokensale']
+hashtag = ['#mpgvip', '#freebitcoin', '#makeyourownlane', '#footballcoin','@sexservice']
+bigram = ['current price', 'bitcoin price', 'earn bitcoin','free trading','android app','join moneypot','join our']
+trigram = ['start trading bitcoin','satoshis best kept','join daily signals','hash rush update','in real estate','invest in our','we are accepting','join the ico']
+toFilter= word+ hashtag + bigram + trigram
 
-stream = TwitterStream(track, filterList)
-stream.run(writer.writeTweetSentiment)
+streamer = TwitterStreamer(tracker, toFilter)
+streamer.run(writer.writeTweetsEarly)

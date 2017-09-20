@@ -2,23 +2,31 @@ import thread
 import time
 import datetime
 from model import *
+from twitter_preprocessor import *
 
-db.connect()
-db.create_table(Tweet, safe=True)
-
-def writeTweetSentimentDelayed(text, scores, retry = 10):
+db.get_conn()
+db.create_table(TweetEarlyEth, safe=True)
+db.create_table(TweetEarlyBtc, safe=True)
+def writeTweetsEarlyDelayed(text, retry = 10):
     time.sleep(3)
-    writeTweetSentiment(text, scores, retry)
+    writeTweetsEarly(text, retry)
 
-def writeTweetSentiment(text, scores, retry = 10):
-    ts = datetime.datetime.utcnow()
+def writeTweetsEarly(text, retry = 10):
+    timeStamp = datetime.datetime.utcnow()
     try:
-        t = Tweet(timestamp=ts, text=text, positive=scores['pos'], negative=scores['neg'], neutral=scores['neu']).save()
-        print str(ts) + ": " + str(t) + " tweet written."
+        textLowered=text.lower()
+        if(('ethereum' in textLowered) or ('eth' in textLowered)):
+            t = TweetEarlyEth(timestamp=timeStamp, text=text).save()
+            #print str(timeStamp) + ": " + str(t) + " ETH tweet written to early."
+            thread.start_new_thread( PreprocessorEth, (text,timeStamp) )
+        if(('bitcoin' in textLowered) or ('btc' in textLowered) or ('xbt' in textLowered)):
+            t = TweetEarlyBtc(timestamp=timeStamp, text=text).save()          
+            #print str(timeStamp) + ": " + str(t) + " BTC tweet written to early."
+            thread.start_new_thread( PreprocessorBtc, (text,timeStamp) )
     except:
         if retry > 0:
-            print "[ERROR] retry writing tweet: " + text + "score: " + str(scores)
+            print "[ERROR] retry writing tweet: " + text
             #writeTweetSentiment(text, scores, retry = retry-1)
-            thread.start_new_thread( writeTweetSentimentDelayed, (text, scores, retry-1) )
+            thread.start_new_thread( writeTweetsEarlyDelayed, (text, retry-1) )
         else:
-            print "[ERROR] failed writing tweet: " + text + "score: " + str(scores)
+            print "[ERROR] failed writing tweet: " + text
