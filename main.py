@@ -1,5 +1,5 @@
 import tweet_writer as writer
-from twitter_streamer import *
+from twitter_stream import *
 
 tracker = ['ethereum','eth','btc', 'bitcoin', 'xbt']
 
@@ -9,5 +9,5 @@ bigram = ['current price', 'bitcoin price', 'earn bitcoin','free trading','andro
 trigram = ['start trading bitcoin','satoshis best kept','join daily signals','hash rush update','in real estate','invest in our','we are accepting','join the ico']
 toFilter= word+ hashtag + bigram + trigram
 
-streamer = TwitterStreamer(tracker, toFilter)
+streamer = TwitterStream(tracker, toFilter)
 streamer.run(writer.writeTweetsEarly)

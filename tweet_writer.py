@@ -21,7 +21,7 @@ def writeTweetsEarly(text, retry = 10):
             #print str(timeStamp) + ": " + str(t) + " ETH tweet written to early."
             thread.start_new_thread( PreprocessorEth, (text,timeStamp) )
         if(('bitcoin' in textLowered) or ('btc' in textLowered) or ('xbt' in textLowered)):
-            t = TweetEarlyBtc(timestamp=timeStamp, text=text).save()          
+            t = TweetEarlyBtc(timestamp=timeStamp, text=text).save()
             #print str(timeStamp) + ": " + str(t) + " BTC tweet written to early."
             thread.start_new_thread( PreprocessorBtc, (text,timeStamp) )
     except:
