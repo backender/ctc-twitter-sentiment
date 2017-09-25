@@ -17,6 +17,7 @@ class TwitterStream:
 
     @retry(wait_fixed=2000, stop_max_attempt_number=30)
     def run(self, writer, memorized=100):
+        print "Run twitter stream."
         latestItems=[]
         for line in self.api.GetStreamFilter(track=self.track, languages=['en']):
             item = json.loads(json.dumps(line))
@@ -31,7 +32,7 @@ class TwitterStream:
                         duplicateFound=True
                         break
                 if(duplicateFound):
-                    # print 'Found duplicate : ' + text
+                    print 'Found duplicate : ' + text
                     continue
                 #print 'No duplicates '+str(len(latestItems))
                 if len(latestItems)<memorized:

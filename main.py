@@ -11,3 +11,5 @@ toFilter= word+ hashtag + bigram + trigram
 
 streamer = TwitterStream(tracker, toFilter)
 streamer.run(writer.writeTweetsEarly)
+
+print "Streamer exited."
