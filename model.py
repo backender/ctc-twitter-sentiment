@@ -18,19 +18,19 @@ class TweetEarlyEth(MySQLModel):
     text = pw.TextField(null=True)
     class Meta:
         db_table = 'TweetEarlyEth'
-        
+
 class TweetEarlyBtc(MySQLModel):
     timestamp = pw.DateTimeField(null=True)
     text = pw.TextField(null=True)
     class Meta:
         db_table = 'TweetEarlyBtc'
-        
+
 class TweetMidEth(MySQLModel):
     timestamp = pw.DateTimeField(null=True)
     text = pw.TextField(null=True)
     class Meta:
         db_table = 'TweetMidEth'
-        
+
 class TweetMidBtc(MySQLModel):
     timestamp = pw.DateTimeField(null=True)
     text = pw.TextField(null=True)

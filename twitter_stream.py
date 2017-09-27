@@ -1,4 +1,4 @@
-from retrying import retry
+from tenacity import *
 import os
 import json
 import unicodedata
@@ -15,7 +15,7 @@ class TwitterStream:
                           access_token_secret=os.environ['TWITTER_TOKEN_SECRET'])
 
 
-    @retry(wait_fixed=2000, stop_max_attempt_number=30)
+    @retry(wait=wait_fixed(2), stop=stop_after_attempt(20))
     def run(self, writer, memorized=100):
         print "Run twitter stream."
         latestItems=[]

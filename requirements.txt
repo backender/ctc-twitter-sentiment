@@ -1,4 +1,4 @@
 python-twitter
 peewee
 PyMySQL
-retrying
+tenacity
